@@ -1,0 +1,97 @@
+
+/* Tarjetas de curso */
+.curso {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.curso:hover {
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
+}
+
+.curso h3 {
+    margin: 0;
+    color: #004aad;
+}
+
+.curso p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Botones pequeños */
+button {
+    margin-top: 8px;
+    margin-right: 5px;
+    font-size: 0.9rem;
+}
+
+/* Badges para usuarios o notas */
+.badge {
+    display: inline-block;
+    background: #004aad;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+/* Lista de materiales */
+#listaMateriales {
+    margin-top: 10px;
+}
+
+.material {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.material strong {
+    color: #333;
+}
+
+.material small {
+    color: #777;
+}
+
+/* Tabla de calificaciones */
+.tabla-notas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.tabla-notas th,
+.tabla-notas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.tabla-notas th {
+    background-color: #004aad;
+    color: white;
+}
+
+.tabla-notas tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Notificación (tipo alerta simple) */
+.alerta {
+    background-color: #ffecb3;
+    color: #333;
+    border: 1px solid #f1c40f;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}

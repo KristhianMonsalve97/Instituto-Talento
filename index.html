@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Talento</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+
+    <!-- Encabezado principal -->
+    <header class="header">
+        <div class="logo">
+            <img src="assets/logo.jpg" alt="Logo" class="logo-img">
+            <h1>Instituto Talento</h1>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="#cursos" class="active">Cursos</a></li>
+                <li><a href="#materiales">Materiales</a></li>
+                <li><a href="#usuarios">Usuarios</a></li>
+                <li><a href="#calificaciones">Notas</a></li>
+            </ul>
+        </nav>
+        <div class="user">
+            <span> Admin</span>
+            <button id="btnSalir">Salir</button>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Cursos -->
+        <section id="cursos" class="section active">
+            <h2>Gestión de Cursos</h2>
+            <button id="btnNuevoCurso">+ Nuevo Curso</button>
+            <div id="listaCursos"></div>
+        </section>
+
+        <!-- Materiales -->
+        <section id="materiales" class="section">
+            <h2>Materiales</h2>
+            <select id="cursoMateriales">
+                <option value="">Seleccionar curso</option>
+            </select>
+            <div id="listaMateriales"></div>
+        </section>
+
+        <!-- Usuarios -->
+        <section id="usuarios" class="section">
+            <h2>Usuarios</h2>
+            <button id="btnDocente">Asignar Docente</button>
+            <button id="btnEstudiante">Matricular Estudiante</button>
+            <div id="docentes"></div>
+            <div id="estudiantes"></div>
+        </section>
+
+        <!-- Calificaciones -->
+        <section id="calificaciones" class="section">
+            <h2>Calificaciones</h2>
+            <select id="cursoNotas">
+                <option value="">Seleccionar curso</option>
+            </select>
+            <div id="listaNotas"></div>
+            <button id="btnCertificados">Generar Certificados</button>
+        </section>
+    </main>
+
+    <!-- modal para formulario -->
+    <div id="modal" class="modal">
+        <div class="modal-contenido">
+            <h3 id="tituloModal">Nuevo Curso</h3>
+            <form id="formCurso">
+                <label>Nombre:</label>
+                <input type="text" id="nombreCurso" required>
+                <label>Descripción:</label>
+                <textarea id="descripcionCurso"></textarea>
+                <label>Fecha inicio:</label>
+                <input type="date" id="fechaInicio">
+                <label>Fecha fin:</label>
+                <input type="date" id="fechaFin">
+                <div class="acciones">
+                    <button type="button" id="btnCancelar">Cancelar</button>
+                    <button type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
