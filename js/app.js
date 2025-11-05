@@ -1,4 +1,3 @@
-
 let cursos = [];
 let modal = document.getElementById("modal");
 let form = document.getElementById("formCurso");
@@ -8,6 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     configurarMenu();
     form.addEventListener("submit", guardarCurso);
     document.getElementById("btnCancelar").addEventListener("click", cerrarModal);
+    document.getElementById("btnNuevoCurso").addEventListener("click", abrirModal);
+    
+    // Funcionalidad para formulario de estudiantes
+    document.getElementById("btnEstudiante").addEventListener("click", mostrarFormularioEstudiante);
+    document.getElementById("btnCancelarRegistro").addEventListener("click", ocultarFormularioEstudiante);
 });
 
 function configurarMenu() {
@@ -95,4 +99,29 @@ function eliminarCurso(id) {
         cursos = cursos.filter(c => c.id !== id);
         mostrarCursos();
     }
+}
+
+// Funcionalidad para formulario de estudiantes
+function mostrarFormularioEstudiante() {
+    document.getElementById("formularioEstudiante").style.display = "block";
+}
+
+function ocultarFormularioEstudiante() {
+    document.getElementById("formularioEstudiante").style.display = "none";
+    document.getElementById("formulario").reset();
+    
+    // Limpiar estados de validación
+    const grupos = document.querySelectorAll(".formulario__grupo");
+    grupos.forEach(grupo => {
+        grupo.classList.remove("formulario__grupo-correcto", "formulario__grupo-incorrecto");
+    });
+    
+    const iconos = document.querySelectorAll(".formulario__validacion-estado");
+    iconos.forEach(icono => {
+        icono.classList.remove("fa-check-circle", "fa-times-circle");
+        icono.classList.add("fa-times-circle");
+    });
+    
+    document.getElementById("formulario__mensaje").classList.remove("formulario__mensaje-activo");
+    document.getElementById("formulario__mensaje-exito").classList.remove("formulario__mensaje-exito-activo");
 }

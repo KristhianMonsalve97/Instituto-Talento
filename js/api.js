@@ -1,4 +1,3 @@
-
 const apiCursos = {
     async obtenerCursos() {
         return [

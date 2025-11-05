@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instituto Talento</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-
     <!-- Encabezado principal -->
     <header class="header">
         <div class="logo">
@@ -24,7 +24,7 @@
             </ul>
         </nav>
         <div class="user">
-            <span> Admin</span>
+            <span>Admin</span>
             <button id="btnSalir">Salir</button>
         </div>
     </header>
@@ -52,6 +52,15 @@
             <h2>Usuarios</h2>
             <button id="btnDocente">Asignar Docente</button>
             <button id="btnEstudiante">Matricular Estudiante</button>
+            
+            <!-- Formulario de registro de estudiantes -->
+            <div id="formularioEstudiante" class="formulario-contenedor">
+                <h3>Registro de Estudiantes</h3>
+                <form class="formulario" id="formulario">
+                    <!-- Campos del formulario -->
+                </form>
+            </div>
+            
             <div id="docentes"></div>
             <div id="estudiantes"></div>
         </section>
@@ -67,28 +76,18 @@
         </section>
     </main>
 
-    <!-- modal para formulario -->
+    <!-- Modal para formulario de cursos -->
     <div id="modal" class="modal">
         <div class="modal-contenido">
             <h3 id="tituloModal">Nuevo Curso</h3>
             <form id="formCurso">
-                <label>Nombre:</label>
-                <input type="text" id="nombreCurso" required>
-                <label>Descripción:</label>
-                <textarea id="descripcionCurso"></textarea>
-                <label>Fecha inicio:</label>
-                <input type="date" id="fechaInicio">
-                <label>Fecha fin:</label>
-                <input type="date" id="fechaFin">
-                <div class="acciones">
-                    <button type="button" id="btnCancelar">Cancelar</button>
-                    <button type="submit">Guardar</button>
-                </div>
+                <!-- Campos del formulario de cursos -->
             </form>
         </div>
     </div>
 
     <script src="js/api.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
