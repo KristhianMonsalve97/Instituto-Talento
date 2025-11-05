@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnCancelar").addEventListener("click", cerrarModal);
     document.getElementById("btnNuevoCurso").addEventListener("click", abrirModal);
     
-    // Funcionalidad para formulario de estudiantes
+   
     document.getElementById("btnEstudiante").addEventListener("click", mostrarFormularioEstudiante);
     document.getElementById("btnCancelarRegistro").addEventListener("click", ocultarFormularioEstudiante);
 });
@@ -25,17 +25,29 @@ function configurarMenu() {
             sections.forEach(s => s.classList.remove("active"));
             link.classList.add("active");
             document.querySelector(link.getAttribute("href")).classList.add("active");
+            
+           
+            if (link.getAttribute("href") !== "#usuarios") {
+                ocultarFormularioEstudiante();
+            }
         });
     });
 }
 
 async function cargarCursos() {
-    cursos = await apiCursos.obtenerCursos();
-    mostrarCursos();
+    try {
+        cursos = await apiCursos.obtenerCursos();
+        mostrarCursos();
+    } catch (error) {
+        console.error("Error al cargar cursos:", error);
+        mostrarCursos();
+    }
 }
 
 function mostrarCursos() {
     const cont = document.getElementById("listaCursos");
+    if (!cont) return;
+    
     if (cursos.length === 0) {
         cont.innerHTML = "<p>No hay cursos todavía</p>";
         return;
@@ -53,13 +65,17 @@ function mostrarCursos() {
 }
 
 function abrirModal() {
-    modal.style.display = "block";
+    if (modal) {
+        modal.style.display = "block";
+    }
 }
 
 function cerrarModal() {
-    modal.style.display = "none";
-    form.reset();
-    delete form.dataset.id;
+    if (modal) {
+        modal.style.display = "none";
+        form.reset();
+        delete form.dataset.id;
+    }
 }
 
 function guardarCurso(e) {
@@ -101,27 +117,152 @@ function eliminarCurso(id) {
     }
 }
 
-// Funcionalidad para formulario de estudiantes
+
 function mostrarFormularioEstudiante() {
-    document.getElementById("formularioEstudiante").style.display = "block";
+    const formularioEstudiante = document.getElementById("formularioEstudiante");
+    if (formularioEstudiante) {
+        formularioEstudiante.style.display = "block";
+    }
 }
 
 function ocultarFormularioEstudiante() {
-    document.getElementById("formularioEstudiante").style.display = "none";
-    document.getElementById("formulario").reset();
+    const formularioEstudiante = document.getElementById("formularioEstudiante");
+    const formulario = document.getElementById("formulario");
     
-    // Limpiar estados de validación
-    const grupos = document.querySelectorAll(".formulario__grupo");
-    grupos.forEach(grupo => {
-        grupo.classList.remove("formulario__grupo-correcto", "formulario__grupo-incorrecto");
-    });
+    if (formularioEstudiante) {
+        formularioEstudiante.style.display = "none";
+    }
     
-    const iconos = document.querySelectorAll(".formulario__validacion-estado");
-    iconos.forEach(icono => {
-        icono.classList.remove("fa-check-circle", "fa-times-circle");
-        icono.classList.add("fa-times-circle");
-    });
-    
-    document.getElementById("formulario__mensaje").classList.remove("formulario__mensaje-activo");
-    document.getElementById("formulario__mensaje-exito").classList.remove("formulario__mensaje-exito-activo");
+    if (formulario) {
+        formulario.reset();
+        
+
+        const grupos = document.querySelectorAll(".formulario__grupo");
+        grupos.forEach(grupo => {
+            grupo.classList.remove("formulario__grupo-correcto", "formulario__grupo-incorrecto");
+        });
+        
+        const iconos = document.querySelectorAll(".formulario__validacion-estado");
+        iconos.forEach(icono => {
+            icono.classList.remove("fa-check-circle", "fa-times-circle");
+            icono.classList.add("fa-times-circle");
+        });
+        
+        document.getElementById("formulario__mensaje").classList.remove("formulario__mensaje-activo");
+        document.getElementById("formulario__mensaje-exito").classList.remove("formulario__mensaje-exito-activo");
+    }
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnCambiarColor = document.getElementById('btnCambiarColor');
+    const selectorColores = document.getElementById('selectorColores');
+    const colorOptions = document.querySelectorAll('.color-option');
+    
+   
+    const colorGuardado = localStorage.getItem('colorMenu');
+    if (colorGuardado) {
+        aplicarColor(colorGuardado);
+        marcarColorActivo(colorGuardado);
+    }
+    
+   
+    btnCambiarColor.addEventListener('click', function(e) {
+        e.stopPropagation();
+        selectorColores.classList.toggle('mostrar');
+    });
+    
+
+    colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const color = this.getAttribute('data-color');
+            aplicarColor(color);
+            marcarColorActivo(color);
+            selectorColores.classList.remove('mostrar');
+           
+            localStorage.setItem('colorMenu', color);
+        });
+    });
+    
+  
+    document.addEventListener('click', function() {
+        selectorColores.classList.remove('mostrar');
+    });
+    
+    
+    selectorColores.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    function aplicarColor(color) {
+        
+        const header = document.querySelector('.header');
+        const botones = document.querySelectorAll('button:not(.btn-color)');
+        const badges = document.querySelectorAll('.badge');
+        
+     
+        document.documentElement.style.setProperty('--color-primario', color);
+        
+       
+        header.style.backgroundColor = color;
+        
+        
+        botones.forEach(btn => {
+            if (!btn.classList.contains('btn-color')) {
+                btn.style.backgroundColor = color;
+                btn.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = oscurecerColor(color, 20);
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = color;
+                });
+            }
+        });
+        
+    
+        badges.forEach(badge => {
+            badge.style.backgroundColor = color;
+        });
+        
+    
+        const ths = document.querySelectorAll('.tabla-notas th');
+        ths.forEach(th => {
+            th.style.backgroundColor = color;
+        });
+    }
+    
+    function marcarColorActivo(color) {
+        colorOptions.forEach(option => {
+            if (option.getAttribute('data-color') === color) {
+                option.classList.add('activo');
+              
+                if (!option.querySelector('.color-indicador')) {
+                    const indicador = document.createElement('div');
+                    indicador.className = 'color-indicador';
+                    option.appendChild(indicador);
+                }
+            } else {
+                option.classList.remove('activo');
+                const indicador = option.querySelector('.color-indicador');
+                if (indicador) {
+                    indicador.remove();
+                }
+            }
+        });
+    }
+    
+    function oscurecerColor(color, porcentaje) {
+   
+        let r = parseInt(color.slice(1, 3), 16);
+        let g = parseInt(color.slice(3, 5), 16);
+        let b = parseInt(color.slice(5, 7), 16);
+        
+     
+        r = Math.max(0, r - (r * porcentaje / 100));
+        g = Math.max(0, g - (g * porcentaje / 100));
+        b = Math.max(0, b - (b * porcentaje / 100));
+        
+        // Volver a hex
+        return `#${Math.round(r).toString(16).padStart(2, '0')}${Math.round(g).toString(16).padStart(2, '0')}${Math.round(b).toString(16).padStart(2, '0')}`;
+    }
+});

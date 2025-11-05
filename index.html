@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instituto Talento</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" href="assets/logo.jpg">
 </head>
 <body>
-    <!-- Encabezado principal -->
+
+
     <header class="header">
         <div class="logo">
-            <img src="assets/logo.jpg" alt="Logo" class="logo-img">
+         
+            <img src="assets/logo.jpg" alt="logo" width="50px">
             <h1>Instituto Talento</h1>
         </div>
         <nav>
@@ -24,21 +27,36 @@
             </ul>
         </nav>
         <div class="user">
+            <!-- Botón para cambiar colores -->
+            <button id="btnCambiarColor" class="btn-color" title="Cambiar color del tema">
+                <i class="fas fa-palette"></i>
+            </button>
+            
+          
+            <div id="selectorColores" class="selector-colores">
+                <div class="color-option" data-color="#004aad" style="background-color: #004aad;" title="Azul Original"></div>
+                <div class="color-option" data-color="#2c5530" style="background-color: #2c5530;" title="Verde Bosque"></div>
+                <div class="color-option" data-color="#7b1fa2" style="background-color: #7b1fa2;" title="Púrpura"></div>
+                <div class="color-option" data-color="#d32f2f" style="background-color: #d32f2f;" title="Rojo"></div>
+                <div class="color-option" data-color="#f57c00" style="background-color: #f57c00;" title="Naranja"></div>
+                <div class="color-option" data-color="#00796b" style="background-color: #00796b;" title="Verde Azulado"></div>
+            </div>
+            
             <span>Admin</span>
             <button id="btnSalir">Salir</button>
         </div>
     </header>
 
-    <!-- Contenido principal -->
+  
     <main>
-        <!-- Cursos -->
+    
         <section id="cursos" class="section active">
             <h2>Gestión de Cursos</h2>
             <button id="btnNuevoCurso">+ Nuevo Curso</button>
             <div id="listaCursos"></div>
         </section>
 
-        <!-- Materiales -->
+      
         <section id="materiales" class="section">
             <h2>Materiales</h2>
             <select id="cursoMateriales">
@@ -47,17 +65,77 @@
             <div id="listaMateriales"></div>
         </section>
 
-        <!-- Usuarios -->
+      
         <section id="usuarios" class="section">
             <h2>Usuarios</h2>
             <button id="btnDocente">Asignar Docente</button>
             <button id="btnEstudiante">Matricular Estudiante</button>
             
-            <!-- Formulario de registro de estudiantes -->
+            
             <div id="formularioEstudiante" class="formulario-contenedor">
                 <h3>Registro de Estudiantes</h3>
                 <form class="formulario" id="formulario">
-                    <!-- Campos del formulario -->
+                 
+                    <div class="formulario__grupo" id="grupo__nombre">
+                        <label class="formulario__label">Nombre y Apellido</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="nombre" id="nombre" placeholder="Nombre del Estudiante">
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">Espacio vacío, agregar nombre del aspirante.</p>
+                    </div>
+
+      
+                    <div class="formulario__grupo" id="grupo__direccion">
+                        <label class="formulario__label">Dirección</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="direccion" id="direccion" placeholder="Dirección de la residencia actual">
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">Espacio vacío, agregar dirección de residencia del aspirante.</p>
+                    </div>
+
+                 
+                    <div class="formulario__grupo" id="grupo__correo">
+                        <label class="formulario__label">Correo Electrónico</label>
+                        <div class="formulario__grupo-input">
+                            <input type="email" class="formulario__input" name="correo" id="correo" placeholder="correo@xxx.com">
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El correo debe tener mínimo 4 caracteres y formato válido.</p>
+                    </div>
+
+       
+                    <div class="formulario__grupo" id="grupo__telefono">
+                        <label class="formulario__label">Teléfono</label>
+                        <div class="formulario__grupo-input">
+                            <input type="tel" class="formulario__input" name="telefono" id="telefono" placeholder="0123456789">
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El número debe tener 10 dígitos</p>
+                    </div>
+
+          
+                    <div class="formulario__grupo formulario__grupo-terminos" id="grupo__terminos">
+                        <label class="formulario__label">
+                            <input class="formulario__checkbox" type="checkbox" name="terminos" id="terminos">
+                            <span class="formulario__span">Acepto los términos y condiciones</span>
+                        </label>
+                    </div>
+                    
+                
+                    <div class="formulario__mensaje" id="formulario__mensaje">
+                        <p><i class="fas fa-exclamation-circle"></i> <b>Error:</b> Debes completar todos los campos correctamente</p>
+                    </div>
+
+                  
+                    <div class="formulario__grupo formulario__grupo-btn-enviar">
+                        <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">El formulario se envió correctamente</p>
+                        <div class="acciones">
+                            <button type="button" id="btnCancelarRegistro">Cancelar</button>
+                            <button type="submit" class="formulario__btn">Enviar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
             
@@ -65,7 +143,7 @@
             <div id="estudiantes"></div>
         </section>
 
-        <!-- Calificaciones -->
+
         <section id="calificaciones" class="section">
             <h2>Calificaciones</h2>
             <select id="cursoNotas">
@@ -76,12 +154,23 @@
         </section>
     </main>
 
-    <!-- Modal para formulario de cursos -->
+  
     <div id="modal" class="modal">
         <div class="modal-contenido">
             <h3 id="tituloModal">Nuevo Curso</h3>
             <form id="formCurso">
-                <!-- Campos del formulario de cursos -->
+                <label>Nombre:</label>
+                <input type="text" id="nombreCurso" required>
+                <label>Descripción:</label>
+                <textarea id="descripcionCurso"></textarea>
+                <label>Fecha inicio:</label>
+                <input type="date" id="fechaInicio">
+                <label>Fecha fin:</label>
+                <input type="date" id="fechaFin">
+                <div class="acciones">
+                    <button type="button" id="btnCancelar">Cancelar</button>
+                    <button type="submit">Guardar</button>
+                </div>
             </form>
         </div>
     </div>

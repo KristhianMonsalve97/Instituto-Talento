@@ -133,6 +133,7 @@ button {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 .formulario__input:focus {
@@ -204,7 +205,6 @@ button {
     display: block;
 }
 
-
 .formulario__grupo-correcto .formulario__validacion-estado {
     color: #1ed12d;
     opacity: 1;
@@ -225,6 +225,21 @@ button {
 
 .formulario__grupo-incorrecto .formulario__input {
     border: 1px solid #e74c3c;
+}
+
+/* Botones del formulario */
+.formulario__btn {
+    background: #0066cc;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.formulario__btn:hover {
+    background: #0055a3;
 }
 
 /* Responsive */
